@@ -50,7 +50,7 @@ client.on(Events.InteractionCreate, async interaction => {
         try{
             const data = await fs.readFile(dbFilePath, 'utf8');
         const fileObject = JSON.parse(data);
-        const previousId = fileObject.id - 1;
+        let previousId = fileObject.id - 1;
         if (previousID < 0){
             interaction.reply(`The previous victim was ${victimArray[previousId]}`);
         }
