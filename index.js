@@ -6,9 +6,14 @@ if (!token){
     console.log("Token not found! Or Some error happened.");
     process.exit(1);
 }
-const fs = require('fs').promises;
-const port = process.env.PORT || 10000;
+const express = require ('express');
+const app = express();
+const PORT = process.env.PORT || 10000;
+app.listen(PORT, () => {
+    console.log("Listening on port 10000");
+})
 
+const fs = require('fs').promises;
 //path to json file
 const dbFilePath = './db.json';
 let victimArray = ["snAinsley", "snWillis", "snGudsin", "snJohn"];
