@@ -37,12 +37,33 @@ client.once(Events.ClientReady, c => {
         .setDescription('Replies with name of current victim');
         //guildID in the create function
         client.application.commands.create(whoGame, "422229816922865674");
+    const lastVictim = new SlashCommandBuilder()
+        .setName('lastvictim')
+        .setDescription('tells you who was the last victim')
+        client.application.commands.create(lastVictim, "422229816922865674");
 });
 
 client.on(Events.InteractionCreate, async interaction => {
     if (!interaction.isChatInputCommand()) return;
     
+    if (interaction.commandName === "lastvictim"){
+        try{
+            const data = await fs.readFile(dbFilePath, 'utf8');
+        const fileObject = JSON.parse(data);
+        const previousId = fileObject.id - 1;
+        if (previousID < 0){
+            interaction.reply(`The previous victim was ${victimArray[previousId]}`);
+        }
+        else {
+            interaction.reply("There was no previous victim recorded because this was the first time this bot has been called lol");
+        }
+    } catch (err){
+        console.log("Error occuered whlle awaiting data: " + err);
+        }
+    console.log(interaction);
+    }
 
+    
 
     if (interaction.commandName === "whogame"){
     try {
@@ -54,7 +75,7 @@ client.on(Events.InteractionCreate, async interaction => {
             id : arrayIndex
             };
         await fs.writeFile(dbFilePath, JSON.stringify(responseNumber));
-        console.log("successfully wrote to file.json");
+        console.log("successfully wrote to db.json");
     }
     catch (error){
         console.log('No existing data file found, or something else went wrong.');
@@ -68,8 +89,8 @@ client.on(Events.InteractionCreate, async interaction => {
             console.log("Error finding value in file.json. Replacing with default value 0");
         }catch(err){
             console.log("Some other error occured");
+            }
         }
-    }
     }
     console.log(interaction);
 });
