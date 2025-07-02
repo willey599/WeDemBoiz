@@ -9,6 +9,12 @@ if (!token){
 const express = require ('express');
 const app = express();
 const PORT = process.env.PORT || 10000;
+
+// Health check endpoint
+app.get('/', (req, res) => {
+  res.send('Discord bot is running!');
+});
+//listen to satisfy Render
 app.listen(PORT, () => {
     console.log("Listening on port 10000");
 })
