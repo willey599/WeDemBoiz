@@ -12,7 +12,8 @@ const PORT = process.env.PORT || 10000;
 
 // Health check endpoint
 app.get('/', (req, res) => {
-  res.send('Discord bot is running!');
+    console.log('Received health check request on /');
+    res.send('Discord bot is running!');
 });
 //listen to satisfy Render
 app.listen(PORT, () => {
