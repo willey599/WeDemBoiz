@@ -51,7 +51,7 @@ client.on(Events.InteractionCreate, async interaction => {
             const data = await fs.readFile(dbFilePath, 'utf8');
         const fileObject = JSON.parse(data);
         let previousId = fileObject.id - 1;
-        if (previousID < 0){
+        if (previousId < 0){
             interaction.reply(`The previous victim was ${victimArray[previousId]}`);
         }
         else {
@@ -60,7 +60,6 @@ client.on(Events.InteractionCreate, async interaction => {
     } catch (err){
         console.log("Error occuered whlle awaiting data: " + err);
         }
-    console.log(interaction);
     }
 
     
